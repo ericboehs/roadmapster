@@ -5,7 +5,7 @@ module Roadmapster
     class Roadmap
       include Roadmapster::Wizeline::BaseApi
 
-      DEFAULT_TYPE_ID = '_0668tj9T5q5MTuqLxlsAA'
+      DEFAULT_TYPE_ID = 'bwhWdvctSnerDNEAnrRQMA'
 
       def initialize(token:, organization:)
         @api_token = token
@@ -25,7 +25,7 @@ module Roadmapster
         all[:data].select { |r| r[:name] == name }.first
       end
 
-      def create_unit(roadmap_id:, name:, **options)
+      def create_unit(roadmap_id:, name:, description:, **options)
         item_payload = {
           id: '-:PENDING:-',
           parent_id: options[:parent_id] || nil,
@@ -33,7 +33,7 @@ module Roadmapster
           unit: {
             id: '-:PENDING:-',
             name: name,
-            description: options[:description] || '',
+            description: description,
             start_date: options[:start_date] || DateTime.now.strftime("%Y-%m-%d"),
             end_date: options[:end_date] || (DateTime.now + 7).strftime("%Y-%m-%d"),
             owner_id: options[:owner_id] || nil,
